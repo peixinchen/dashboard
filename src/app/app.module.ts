@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { CandleComponent } from './candle/candle.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CandleComponent
   ],
   imports: [
     BrowserModule
