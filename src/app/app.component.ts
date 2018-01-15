@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  currencies: string[] = [
+    "BTC",
+    "BCH",
+    "ETH",
+    "XRP",
+    "LTC",
+    "DSH",
+  ];
 }
