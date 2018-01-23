@@ -1,55 +1,47 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, Input } from '@angular/core';
-import * as Highcharts from 'highcharts/js/highcharts';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+
+import * as $ from 'jquery';
+
+import { CandleService } from './candle.service';
+import { HighchartsOptions } from './highcharts-options';
 
 @Component({
   selector: 'app-candle',
   templateUrl: './candle.component.html',
   styleUrls: ['./candle.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [CandleService, HighchartsOptions],
 })
 export class CandleComponent implements OnInit {
 
-  @Input() currency: string;
+  @Input() chartId: string;
+  @Input() symbol: string;
 
-  @ViewChild('chartTarget') chartTarget: ElementRef;
-  chart: Highcharts.ChartObject;
+  chartObject: Highcharts.ChartObject;
 
-  constructor() { }
+  get displaySymbol(): string {
+    return this.symbol.slice(0, 3) + ' - ' + this.symbol.slice(3, 6);
+  }
 
-  ngOnInit() { }
+  constructor(
+    private candleService: CandleService,
+    private highchartsOptions: HighchartsOptions,
+  ) { }
+
+  ngOnInit() {
+  }
 
   ngAfterViewInit() {
-    this.chart = Highcharts.chart(this.chartTarget.nativeElement, {
-      chart: {
-        type: 'bar',
-      },
-
-      title: {
-        text: this.currency,
-      },
-
-      xAxis: {
-        categories: ['Apples', 'Bananas', 'Oranges'],
-      },
-
-      yAxis: {
-        title: {
-          text: 'Fruit eaten',
-        },
-      },
-
-      series: [{
-        name: 'Jane',
-        data: [1, 0, 4],
-      }, {
-        name: 'John',
-        data: [5, 7, 3],
-      }],
-    });
+    this.chartObject = this.drawBaseChart();
   }
 
   ngOnDestroy() {
-    this.chart = null;
+    this.chartObject = null;
   }
 
+  drawBaseChart(): Highcharts.ChartObject {
+    let options = this.highchartsOptions.get();
+    console.log(options);
+    return Highcharts.chart(this.chartId, options);
+  }
 }

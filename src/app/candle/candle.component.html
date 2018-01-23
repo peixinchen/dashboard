@@ -1,1 +1,31 @@
-<div #chartTarget class="col-md-4"></div>
+<div class="col-auto hover-chart" [attr.connect_id]="chartId + '-bar'">
+    <div class="row chart-header">
+        <div class="icon text-box">
+            <img src="/static/img/bitcoin.png">
+        </div>
+        <div class="symbol text-box">
+            <div>{{ displaySymbol }}</div>
+        </div>
+        <div class="chart-headder-divider"></div>
+        <div class="symbol-value text-box current-price">
+            <div>loading...</div>
+        </div>
+        <div class="chart-headder-divider"></div>
+        <div class="text-box change-percent">
+            <div>loading...</div>
+        </div>
+    </div>
+    <div class="loading can-loading">
+        <div class="chart" [attr.id]="chartId"></div>
+        <div class="loading-curtain">
+            <div>
+                <img src="/static/img/loading.png"/>
+                <div class="text-box">
+                    <div>
+                        loading...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
