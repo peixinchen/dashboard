@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 
+import * as Highcharts from 'highcharts/js/highcharts';
 import * as $ from 'jquery';
 
 import { CandleService } from './candle.service';
